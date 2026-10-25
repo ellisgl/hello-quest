@@ -323,7 +323,7 @@ Every script gets `g` (a `ScriptContext`; see
 | **The player** | `g.name`, `g.sex`, `g.bySex('boy', 'girl')`, `g.hp`, `g.maxHp`, `g.gold`, `g.strength`, `g.defense`, `g.exp` (all settable, and kept in range), `g.healFull()`, `g.flags` |
 | **Where** | `g.screenNumber`, `g.x`, `g.y`, `g.moveTo(x, y)`, `g.goto(screen, x, y)` |
 | **Text** | `g.write(text)` (status bar), `g.cls()`, `g.print(...lines)`, `g.overlay(text)` (over the map), `g.scroll(lines, title)` |
-| **Input** | `await g.key()`, `await g.choice(options)` (the index picked, -1 on Escape), `await g.input({ x, y, length })`, `await g.number(...)` |
+| **Input** | `await g.key()`, `await g.choice(options)` (the index picked, -1 on Escape), `await g.input({ x, y, length })`, `await g.ask(...)` (the same, but null on Escape), `await g.askLine(question)` (on the status bar, leaving the map as it is), `await g.number(...)` |
 | **Items** | `g.give(id, n)`, `g.take(id, n)`, `g.count(id)`, `g.has(id, n)`, `g.equip(id)`, `g.unequip(slot)`, `g.use(id)`, `g.inventory`, `g.weapon`, `g.armour` |
 | **Money and shops** | `await g.spend(amount)` (false if they can't), `await g.buy(ids)`, `await g.sell()` |
 | **Fights** | `g.monster(id)`, `await g.fight(monster)` (`'won'`, `'lost'` or `'fled'`) |
