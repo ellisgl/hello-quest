@@ -1,0 +1,4 @@
+[
+  { "id": "stick", "name": "Stick", "kind": "weapon", "power": 10, "value": 5, "description": "Better than nothing." },
+  { "id": "potion", "name": "Potion", "kind": "usable", "value": 20, "effect": { "heal": 30 }, "useText": "You drink the potion. It tastes of mint.", "description": "Heals 30 hitpoints." }
+]

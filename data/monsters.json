@@ -1,0 +1,9 @@
+{
+  "monsters": [
+    { "id": "slime", "name": "Slime", "says": "Blorp.", "hp": 8, "gold": 3, "exp": 5, "attacks": [{ "text": "oozes on you", "power": 4 }] },
+    { "id": "bat", "name": "Bat", "says": "Squeak!", "hp": 12, "gold": 6, "exp": 9, "attacks": [{ "text": "bites you", "power": 6 }, { "text": "flaps in your face", "power": 3 }] }
+  ],
+  "tables": [
+    { "name": "default", "chance": 20, "monsters": ["slime", "bat"] }
+  ]
+}
