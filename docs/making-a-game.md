@@ -363,7 +363,7 @@ Every script gets `g` (a `ScriptContext`; see
 | **Input** | `await g.key()`, `await g.choice(options)` (the index picked, -1 on Escape), `await g.input({ x, y, length })`, `await g.ask(...)` (the same, but null on Escape), `await g.askLine(question)` (on the status bar, leaving the map as it is), `await g.number(...)` |
 | **Items** | `g.give(id, n)`, `g.take(id, n)`, `g.count(id)`, `g.has(id, n)`, `g.equip(id)`, `g.unequip(slot)`, `g.use(id)`, `g.inventory`, `g.weapon`, `g.armour` |
 | **Money and shops** | `await g.spend(amount)` (false if they can't), `await g.buy(ids)`, `await g.sell()` |
-| **Fights** | `g.monster(id)`, `await g.fight(monster)` (`'won'`, `'lost'` or `'fled'`; options `defeat` and `victory` change what losing does and winning says) |
+| **Fights** | `g.monster(id)`, `await g.fight(monster)` (`'won'`, `'lost'` or `'fled'`; options `defeat` and `victory` change what losing does and winning says, and `left` hears the monster's hitpoints at the end, for a monster whose hitpoints are kept in `g.world`) |
 | **The world** | `g.world` (see above), `g.news(text)` (a line in the server's daily news; nothing in single-player) |
 | **Other** | `g.random(n)` (1 to n), `await g.sleep(seconds)`, `await g.animate(delay, path)` |
 
