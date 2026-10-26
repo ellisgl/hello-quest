@@ -84,10 +84,12 @@ Every grid has 22 rows of 79 characters:
 
 - **tiles**: what's drawn, any character one column wide (letters, box
   drawing, symbols...).
-- **fg** and **bg**: the colours, one hex digit each; backgrounds 0 to 7
-  only. The 16 colours, 0 to F: black, blue, green, cyan, red, magenta,
-  brown, gray, darkgray, lightblue, lightgreen, lightcyan, lightred,
-  lightmagenta, yellow, white.
+- **fg** and **bg**: the colours, one hex digit each for the 16 CGA
+  colours, 0 to F: black, blue, green, cyan, red, magenta, brown, gray,
+  darkgray, lightblue, lightgreen, lightcyan, lightred, lightmagenta,
+  yellow, white. For more, a row can have two hex digits a cell (`00` to
+  `FF`), any of the 256 colours (see "Colours" below). The editor writes
+  two digits a cell in a grid only when that grid uses a colour past `F`.
 - **solid**: `#` can't be walked through, `.` can.
 - **terrain**: `.` grass, `f` forest, `m` mountain, `w` water, `r` road,
   `_` floor, `#` structure.
@@ -244,8 +246,9 @@ game's text gets its colours and places:
 | Markup | |
 |---|---|
 | `{yellow}` | foreground colour (any of the 16 names) |
-| `{blink red}` | blinking foreground |
-| `{on blue}` | background colour (the first 8) |
+| `{color 208}` | foreground colour by number, 0 to 255 |
+| `{blink red}` `{blink 208}` | blinking foreground |
+| `{on blue}` `{on 17}` | background colour |
 | `{x 27}` `{y 5}` | move to a column or row |
 | `{sp 10}` | ten spaces in the current colours |
 | `{center}` | centre the rest of the line |
@@ -253,6 +256,32 @@ game's text gets its colours and places:
 
 Anything the player typed (their name, say) should go through
 `escapeMarkup`, so a `{` in it is shown, not read as markup.
+
+### Colours
+
+A colour is a number from 0 to 255, wherever one is used (maps, markup,
+`screen.put`):
+
+- **0 to 15** are the 16 CGA colours, in CGA's order (the names above).
+- **16 to 231** are a 6x6x6 cube of red, green and blue: 16 + 36r + 6g + b,
+  each from 0 to 5 (0, 95, 135, 175, 215 and 255). 208 is orange (5, 2, 0).
+- **232 to 255** are 24 greys, from nearly black to nearly white.
+
+These are xterm's 256 colours. Each player's terminal is drawn to as well
+as it can:
+
+- **True colour** (the web page, and terminals that set `COLORTERM`)
+  shows every colour exactly, the CGA ones included.
+- **256 colours** (a `TERM` naming `256color`) shows the CGA colours as
+  the nearest of xterm's 16 to 255. A terminal's own first 16 are its
+  theme's, and its "brown" is often yellow.
+- **16 colours** (any other terminal) shows the rest as the nearest of the
+  16. Pick colours that still read well that way: a subtle shading of
+  greys can all become one grey.
+
+Locally, `FQ2_COLORS` (`true`, `256` or `16`) overrides what the terminal
+says. Over SSH, the server goes by the terminal type the client sends
+(and `COLORTERM`, if the client sends it).
 
 ### The opening and the inventory
 
@@ -453,7 +482,8 @@ Games load mods with `loadMods` and `applyMods`, as hello.ts does; see
 
 ## What the engine doesn't do (yet)
 
-- The screen is 80x25 and 16 colours.
+- The screen is 80x25, and colours are xterm's 256: no colour by its own
+  red, green and blue.
 - The title menu's six options and their order are fixed.
 - The engine's keys while exploring are fixed: arrows (or 8 4 6 2) to
   walk, I or V, M, B, R, ? and Escape. A game can add its own (see Keys),
