@@ -35,8 +35,8 @@ back-buffer screens.
 
 ## Setting up
 
-Make a repository with a `package.json`; the engine comes from GitHub,
-pinned to a tag:
+Make a repository with a `package.json`; the engine and tools come from
+GitHub:
 
 ```json
 {
@@ -44,13 +44,19 @@ pinned to a tag:
   "private": true,
   "type": "module",
   "dependencies": {
-    "@fq2ts/engine": "github:ellisgl/fq2ts-engine#v0.1.0",
+    "@fq2ts/engine": "github:ellisgl/fq2ts-engine#f8066accf40f0a0fdecad3afe48a6cdf6f0adfc3",
     "@fq2ts/tools": "github:ellisgl/fq2ts-tools#v0.1.0"
+  },
+  "overrides": {
+    "@fq2ts/engine": "github:ellisgl/fq2ts-engine#f8066accf40f0a0fdecad3afe48a6cdf6f0adfc3"
   }
 }
 ```
 
-then run `bun install`. `@fq2ts/tools` is only for the level editor.
+then run `bun install`. `@fq2ts/tools` is only for the level editor. The
+engine is named by its commit hash (v0.1.0's), twice: the tools depend on it
+too, and the override makes them share the game's one (the
+[engine's README](https://github.com/ellisgl/fq2ts-engine#using-it) says why).
 
 ## The world
 
