@@ -342,6 +342,21 @@ async function hermit(g: G): Promise<void> {
 event when the player beats it (`lost` and `fled` work the same way). The
 game won't start if a monster names an event that doesn't exist.
 
+### Keys
+
+`keys` are the game's own keys while exploring, beside the engine's
+(arrows or 8 4 6 2, I or V, M, B, R, ? and Escape). Each is one character,
+upper case for a letter, with a line for ? and the script it runs:
+
+```ts
+keys: { F: { help: 'fame: the hall of heroes, the castle and the Wyrm', run: fame } },
+```
+
+FQ2's F shows the realm's own state this way. A key the engine already
+uses won't start (nor S, in debug mode); and a server adds its keys (T, Y,
+P, L and so on) beside the game's, so a game played on the server
+shouldn't take those.
+
 ### upgradeSave
 
 If a new version of the game changes what's in a save (a flag becomes an
@@ -440,5 +455,6 @@ Games load mods with `loadMods` and `applyMods`, as hello.ts does; see
 
 - The screen is 80x25 and 16 colours.
 - The title menu's six options and their order are fixed.
-- The keys while exploring are fixed: arrows (or 8 4 6 2) to walk, I or V,
-  M, B, R, ? and Escape.
+- The engine's keys while exploring are fixed: arrows (or 8 4 6 2) to
+  walk, I or V, M, B, R, ? and Escape. A game can add its own (see Keys),
+  but not change these.
