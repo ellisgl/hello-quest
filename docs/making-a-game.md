@@ -436,7 +436,7 @@ Hello Quest from the opening to the hermit's potion this way.
 
 ## Multiplayer and mods
 
-The same content runs on the multiplayer server, over telnet, SSH and the
+The same content runs on the multiplayer server, over SSH and the
 web, with accounts and saves in a database. A game's server is a few lines
 (see [games/fq2/server.ts](../games/fq2/server.ts)):
 
