@@ -2,9 +2,9 @@
 // The level editor, on Hello Quest's maps:  bun games/hello/tools/edit.ts
 
 import { join } from 'node:path';
-import { Terminal } from '@fq2js/engine/terminal';
-import { main } from '@fq2js/tools/edit';
-import { contentTriggers } from '@fq2js/tools/game';
+import { Terminal } from '@fq2ts/engine/terminal';
+import { main } from '@fq2ts/tools/edit';
+import { contentTriggers } from '@fq2ts/tools/game';
 import content from '../content.ts';
 
 const term = new Terminal({ name: 'The level editor' });

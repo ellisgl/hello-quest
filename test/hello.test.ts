@@ -3,10 +3,10 @@
 
 import { afterEach, expect, spyOn, test, type Mock } from 'bun:test';
 import { join } from 'node:path';
-import { readGameData } from '@fq2js/engine/data';
-import { ScriptContext } from '@fq2js/engine/script';
-import { makeGameWith } from '@fq2js/engine/fixture';
-import { screenText, typed, type Step } from '@fq2js/engine/testing';
+import { readGameData } from '@fq2ts/engine/data';
+import { ScriptContext } from '@fq2ts/engine/script';
+import { makeGameWith } from '@fq2ts/engine/fixture';
+import { screenText, typed, type Step } from '@fq2ts/engine/testing';
 import content, { start } from '../content.ts';
 
 const data = (): ReturnType<typeof readGameData> => readGameData(join(import.meta.dir, '..', 'data'));

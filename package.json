@@ -2,11 +2,11 @@
   "name": "hello-quest",
   "version": "1.0.0",
   "private": true,
-  "description": "The smallest whole game on @fq2js/engine: the worked example in docs/making-a-game.md.",
+  "description": "The smallest whole game on @fq2ts/engine: the worked example in docs/making-a-game.md.",
   "type": "module",
   "license": "MIT",
   "dependencies": {
-    "@fq2js/engine": "workspace:*",
-    "@fq2js/tools": "workspace:*"
+    "@fq2ts/engine": "workspace:*",
+    "@fq2ts/tools": "workspace:*"
   }
 }

@@ -1,6 +1,6 @@
 # Making a game
 
-The engine under Final Quest 2 (`@fq2js/engine`) can run other games of the
+The engine under Final Quest 2 (`@fq2ts/engine`) can run other games of the
 same kind: a hero walking around screens of coloured characters, scripts
 that run when they step on things, shops, items and fights, all in an
 80x25 terminal. This guide makes one from nothing.
@@ -43,13 +43,13 @@ Make a folder in `games/` (the repository's workspace picks it up) with a
   "private": true,
   "type": "module",
   "dependencies": {
-    "@fq2js/engine": "workspace:*",
-    "@fq2js/tools": "workspace:*"
+    "@fq2ts/engine": "workspace:*",
+    "@fq2ts/tools": "workspace:*"
   }
 }
 ```
 
-then run `bun install`. `@fq2js/tools` is only for the level editor.
+then run `bun install`. `@fq2ts/tools` is only for the level editor.
 
 ## The world
 
@@ -110,7 +110,7 @@ bun games/hello/tools/edit.ts
 
 The editor opens on the world grid: N makes a new screen of a kind, Enter
 edits one, and ? lists its keys. (The map viewer and generator in
-`@fq2js/tools` work the same way; see
+`@fq2ts/tools` work the same way; see
 [games/fq2/tools/](../games/fq2/tools/).)
 
 ## The data
@@ -437,14 +437,14 @@ and while exploring.
 
 ## Testing the game
 
-[`@fq2js/engine/testing`](../packages/engine/src/testing.ts) has a
+[`@fq2ts/engine/testing`](../packages/engine/src/testing.ts) has a
 `FakeTerminal` that plays back keys instead of reading the keyboard, so a
 whole game can be played from a test. A step can also be a function, to
 look at the screen at that moment:
 
 ```ts
-import { makeGameWith } from '@fq2js/engine/fixture';
-import { screenText, typed } from '@fq2js/engine/testing';
+import { makeGameWith } from '@fq2ts/engine/fixture';
+import { screenText, typed } from '@fq2ts/engine/testing';
 
 const { game, term } = makeGameWith(content, { ...readGameData(dataDir), screensaver: false });
 term.feed(

@@ -1,10 +1,10 @@
 // Hello Quest's content: everything that makes it this game, as opposed to
 // the engine. (docs/making-a-game.md walks through it.)
 
-import type { Content } from '@fq2js/engine/game';
-import type { Player } from '@fq2js/engine/player';
-import type { ScriptContext } from '@fq2js/engine/script';
-import { escapeMarkup } from '@fq2js/engine/text';
+import type { Content } from '@fq2ts/engine/game';
+import type { Player } from '@fq2ts/engine/player';
+import type { ScriptContext } from '@fq2ts/engine/script';
+import { escapeMarkup } from '@fq2ts/engine/text';
 
 // What the scripts remember about what's happened. (A type alias, not an
 // interface, so that it fits the engine's FlagRecord.)

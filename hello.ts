@@ -2,11 +2,11 @@
 // Hello Quest -- run with:  bun games/hello/hello.ts [--mods DIR]
 
 import { join, resolve } from 'node:path';
-import { Terminal } from '@fq2js/engine/terminal';
-import { Saves } from '@fq2js/engine/saves';
-import { Game } from '@fq2js/engine/game';
-import { readGameData } from '@fq2js/engine/data';
-import { applyMods, loadMods } from '@fq2js/engine/mods';
+import { Terminal } from '@fq2ts/engine/terminal';
+import { Saves } from '@fq2ts/engine/saves';
+import { Game } from '@fq2ts/engine/game';
+import { readGameData } from '@fq2ts/engine/data';
+import { applyMods, loadMods } from '@fq2ts/engine/mods';
 import content, { type Flags } from './content.ts';
 
 // Stops with a plain message (a bad data file, a terminal too small...).
