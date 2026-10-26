@@ -1,5 +1,5 @@
 #!/usr/bin/env bun
-// Hello Quest -- run with:  bun games/hello/hello.ts [--mods DIR]
+// Hello Quest -- run with:  bun hello.ts [--mods DIR]
 
 import { join, resolve } from 'node:path';
 import { Terminal } from '@fq2ts/engine/terminal';

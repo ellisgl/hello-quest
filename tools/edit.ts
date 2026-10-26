@@ -1,5 +1,5 @@
 #!/usr/bin/env bun
-// The level editor, on Hello Quest's maps:  bun games/hello/tools/edit.ts
+// The level editor, on Hello Quest's maps:  bun tools/edit.ts
 
 import { join } from 'node:path';
 import { Terminal } from '@fq2ts/engine/terminal';

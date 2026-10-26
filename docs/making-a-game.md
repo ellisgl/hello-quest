@@ -5,27 +5,28 @@ same kind: a hero walking around screens of coloured characters, scripts
 that run when they step on things, shops, items and fights, all in an
 80x25 terminal. This guide makes one from nothing.
 
-Its worked example is **Hello Quest**, in [games/hello/](../games/hello/):
+Its worked example is **Hello Quest**, in [this repository](../):
 three screens, a sign, a hermit with a potion, and monsters in a field.
 It's the smallest whole game, and it's tested, so everything shown here
-works. (For how the engine works inside, see [architecture.md](architecture.md).)
+works. (For how the engine works inside, see [architecture.md](https://github.com/ellisgl/FQ2TS/blob/main/docs/architecture.md).)
 Play it first:
 
 ```sh
-bun games/hello/hello.ts
+bun install
+bun start              # or: bun hello.ts
 ```
 
 ## What a game is
 
 A game is three things:
 
-- **Data** ([data/](../games/hello/data/)): JSON files for the screens,
+- **Data** ([data/](../data/)): JSON files for the screens,
   items, monsters and a few settings. No code.
-- **Content** ([content.ts](../games/hello/content.ts)): TypeScript for
+- **Content** ([content.ts](../content.ts)): TypeScript for
   everything that happens: the title screen, the opening, what each trigger
   does, the status line. Scripts are `async` functions given `g`, the
   script API.
-- **An entry point** ([hello.ts](../games/hello/hello.ts)): reads the data,
+- **An entry point** ([hello.ts](../hello.ts)): reads the data,
   makes a `Game` and runs it.
 
 The engine does the rest: drawing, walking between screens, the title menu,
@@ -34,8 +35,8 @@ back-buffer screens.
 
 ## Setting up
 
-Make a folder in `games/` (the repository's workspace picks it up) with a
-`package.json`:
+Make a repository with a `package.json`; the engine comes from GitHub,
+pinned to a tag:
 
 ```json
 {
@@ -43,8 +44,8 @@ Make a folder in `games/` (the repository's workspace picks it up) with a
   "private": true,
   "type": "module",
   "dependencies": {
-    "@fq2ts/engine": "workspace:*",
-    "@fq2ts/tools": "workspace:*"
+    "@fq2ts/engine": "github:ellisgl/fq2ts-engine#v0.1.0",
+    "@fq2ts/tools": "github:ellisgl/fq2ts-tools#v0.1.0"
   }
 }
 ```
@@ -101,17 +102,17 @@ Every grid has 22 rows of 79 characters:
   on a server (interiors always are; P in the editor's overview).
 
 Don't write these by hand: use the level editor. Copy Hello Quest's
-[tools/edit.ts](../games/hello/tools/edit.ts), which runs the editor on
+[tools/edit.ts](../tools/edit.ts), which runs the editor on
 the game's maps (and marks the content's trigger tiles), and run it:
 
 ```sh
-bun games/hello/tools/edit.ts
+bun run edit           # or: bun tools/edit.ts
 ```
 
 The editor opens on the world grid: N makes a new screen of a kind, Enter
 edits one, and ? lists its keys. (The map viewer and generator in
 `@fq2ts/tools` work the same way; see
-[games/fq2/tools/](../games/fq2/tools/).)
+[games/fq2/tools/](https://github.com/ellisgl/FQ2TS/tree/main/tools).)
 
 ## The data
 
@@ -162,7 +163,7 @@ an event when the fight ends (see Events below).
 
 ## The content
 
-[content.ts](../games/hello/content.ts) exports one object, the game's
+[content.ts](../content.ts) exports one object, the game's
 `Content`. Its type, `Content<Flags>`, checks that nothing is missing.
 
 ### Flags and the start player
@@ -398,7 +399,7 @@ start.
 ## Scripts: the `g` API
 
 Every script gets `g` (a `ScriptContext`; see
-[script.ts](../packages/engine/src/script.ts) for all of it).
+[script.ts](https://github.com/ellisgl/fq2ts-engine/blob/main/src/script.ts) for all of it).
 
 | | |
 |---|---|
@@ -416,7 +417,7 @@ Scripts can be `async`: `await` everything that waits for the player.
 
 ## The entry point
 
-[hello.ts](../games/hello/hello.ts) reads the data folder, adds any mods,
+[hello.ts](../hello.ts) reads the data folder, adds any mods,
 makes the `Game` and runs it:
 
 ```ts
@@ -437,7 +438,7 @@ and while exploring.
 
 ## Testing the game
 
-[`@fq2ts/engine/testing`](../packages/engine/src/testing.ts) has a
+[`@fq2ts/engine/testing`](https://github.com/ellisgl/fq2ts-engine/blob/main/src/testing.ts) has a
 `FakeTerminal` that plays back keys instead of reading the keyboard, so a
 whole game can be played from a test. A step can also be a function, to
 look at the screen at that moment:
@@ -460,14 +461,14 @@ await game.run();
 expect(game.playing.name).toBe('Ada');
 ```
 
-[games/hello/test/hello.test.ts](../games/hello/test/hello.test.ts) plays
+[test/hello.test.ts](../test/hello.test.ts) plays
 Hello Quest from the opening to the hermit's potion this way.
 
 ## Multiplayer and mods
 
 The same content runs on the multiplayer server, over SSH and the
 web, with accounts and saves in a database. A game's server is a few lines
-(see [games/fq2/server.ts](../games/fq2/server.ts)):
+(see Final Quest 2's [server.ts](https://github.com/ellisgl/FQ2TS/blob/main/server.ts)):
 
 ```ts
 await runServer({ content, name: 'Hello Quest', gameData: join(import.meta.dir, 'data') });
@@ -478,7 +479,7 @@ Two things to know for it: a player's name comes from their account, so
 doesn't), and the screensaver is off.
 
 Games load mods with `loadMods` and `applyMods`, as hello.ts does; see
-[mods.md](mods.md) for writing them.
+[mods.md](https://github.com/ellisgl/FQ2TS/blob/main/docs/mods.md) for writing them.
 
 ## What the engine doesn't do (yet)
 
