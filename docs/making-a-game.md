@@ -8,7 +8,8 @@ that run when they step on things, shops, items and fights, all in an
 Its worked example is **Hello Quest**, in [games/hello/](../games/hello/):
 three screens, a sign, a hermit with a potion, and monsters in a field.
 It's the smallest whole game, and it's tested, so everything shown here
-works. Play it first:
+works. (For how the engine works inside, see [architecture.md](architecture.md).)
+Play it first:
 
 ```sh
 bun games/hello/hello.ts
