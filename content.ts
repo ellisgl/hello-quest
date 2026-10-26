@@ -98,20 +98,34 @@ async function hermit(g: G): Promise<void> {
 
 const content: Content<Flags> = {
     title: {
-        art: ({ title, version, revision }) => [
-            `{y 6}{center}{yellow}${title}`,
-            `{y 8}{center}{gray}${version} ${revision}`,
-            '{y 16}{x 32}{on blue}{sp 18}',
+        // A blue banner framed in gray, with the name in block letters and
+        // the version under it; then a gray-bordered blue box for the menu.
+        art: ({ version, revision }) => [
+            '{y 1}{x 1}{on gray}{sp 35}{white}Main Menu{sp 36}',
+            ...[2, 3, 4, 10, 11, 12].map((y) => `{y ${y}}{on gray} {on blue}{sp 78}{on gray} `),
+            ...[
+                'H   H  EEEEE  L      L       OOO       QQQ   U   U  EEEEE   SSSS  TTTTT',
+                'H   H  E      L      L      O   O     Q   Q  U   U  E      S        T  ',
+                'HHHHH  EEEE   L      L      O   O     Q   Q  U   U  EEEE    SSS     T  ',
+                'H   H  E      L      L      O   O     Q  QQ  U   U  E          S    T  ',
+                'H   H  EEEEE  LLLLL  LLLLL   OOO       QQQQ   UUU   EEEEE  SSSS     T  ',
+            ].map((row, i) => `{y ${5 + i}}{on gray} {on blue}{sp 3}{yellow}${row}{sp 4}{on gray} `),
+            '{y 13}{on gray}{sp 80}',
+            `{y 13}{on gray}{white}{center}${version} ${revision}`,
+            '{y 15}{x 31}{on gray}{sp 20}',
+            ...[16, 17, 18, 19, 20, 21, 22, 23].map((y) => `{y ${y}}{x 31}{on gray} {on blue}{sp 18}{on gray} `),
+            '{y 24}{x 31}{on gray}{sp 20}',
         ],
         // The six options, in the order the engine runs them: new game,
-        // save, load, help, resume, leave. Each is [label, x, y].
+        // save, load, help, resume, leave. Each is [label, x, y], centred in
+        // the box (x 32 to 49).
         menu: {
             options: [
-                ['New game', 36, 17],
+                ['New game', 37, 17],
                 ['Save game', 36, 18],
                 ['Load game', 36, 19],
-                ['Help', 38, 20],
-                ['Resume', 37, 21],
+                ['Help', 39, 20],
+                ['Resume', 38, 21],
                 ['Leave', 38, 22],
             ],
             selectedColor: [14, 1],
