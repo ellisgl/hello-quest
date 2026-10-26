@@ -189,6 +189,31 @@ export const start: Player<Flags> = {
 };
 ```
 
+### The world's state
+
+Flags belong to the player. What belongs to the *world* (who owns the
+castle, how many times the bell has rung) goes in `world`, with its type
+beside the flags, and scripts use it as `g.world`:
+
+```ts
+export type Shared = { castleOwners: readonly string[] };
+
+const content: Content<Flags, Shared> = {
+    ...
+    world: { castleOwners: [] },
+};
+
+// In a script:
+g.world.castleOwners = [...g.world.castleOwners, g.name];
+```
+
+Values are like flags (true or false, a number, a string) or a list of
+strings. A list can't be changed in place: set a new one, as above. In
+single-player the world is saved with the game, and a new game starts it
+again; on the multiplayer server everyone shares one world, kept in its
+database, and when it changes everyone's screen is redrawn. A game with
+nothing shared has `world: {}` (Hello Quest does).
+
 ### The screens around the game
 
 - **title**: `art` draws the title screen; `menu` places its options. The
@@ -327,6 +352,7 @@ Every script gets `g` (a `ScriptContext`; see
 | **Items** | `g.give(id, n)`, `g.take(id, n)`, `g.count(id)`, `g.has(id, n)`, `g.equip(id)`, `g.unequip(slot)`, `g.use(id)`, `g.inventory`, `g.weapon`, `g.armour` |
 | **Money and shops** | `await g.spend(amount)` (false if they can't), `await g.buy(ids)`, `await g.sell()` |
 | **Fights** | `g.monster(id)`, `await g.fight(monster)` (`'won'`, `'lost'` or `'fled'`) |
+| **The world** | `g.world` (see above), `g.news(text)` (a line in the server's daily news; nothing in single-player) |
 | **Other** | `g.random(n)` (1 to n), `await g.sleep(seconds)`, `await g.animate(delay, path)` |
 
 Scripts can be `async`: `await` everything that waits for the player.

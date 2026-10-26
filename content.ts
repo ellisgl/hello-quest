@@ -125,6 +125,8 @@ const content: Content<Flags> = {
     inventory,
     newGame,
     start,
+    // Nothing is shared between players.
+    world: {},
     screens: {
         1: {
             at: {
