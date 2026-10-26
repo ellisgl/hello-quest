@@ -93,7 +93,9 @@ Every grid has 22 rows of 79 characters:
 - **kind**: 0 water, 1 land, 2 interior, 3 town, 4 small town; 5 to 8 are
   land, small town, town and water *with random monsters*.
 - **name** (optional) is shown when the player arrives;
-  **encounters** (optional) names the monster table used there.
+  **encounters** (optional) names the monster table used there;
+  **safe** (optional, `true`) keeps players from fighting each other there
+  on a server (interiors always are; P in the editor's overview).
 
 Don't write these by hand: use the level editor. Copy Hello Quest's
 [tools/edit.ts](../games/hello/tools/edit.ts), which runs the editor on
@@ -213,6 +215,16 @@ single-player the world is saved with the game, and a new game starts it
 again; on the multiplayer server everyone shares one world, kept in its
 database, and when it changes everyone's screen is redrawn. A game with
 nothing shared has `world: {}` (Hello Quest does).
+
+### Daily flags
+
+On a server, a new day dawns at midnight. Flags listed in `daily` go back
+to their start values then, for every player (Final Quest 2's one drink a
+day at the bar):
+
+```ts
+daily: ['hadDrink'],
+```
 
 ### The screens around the game
 
@@ -351,7 +363,7 @@ Every script gets `g` (a `ScriptContext`; see
 | **Input** | `await g.key()`, `await g.choice(options)` (the index picked, -1 on Escape), `await g.input({ x, y, length })`, `await g.ask(...)` (the same, but null on Escape), `await g.askLine(question)` (on the status bar, leaving the map as it is), `await g.number(...)` |
 | **Items** | `g.give(id, n)`, `g.take(id, n)`, `g.count(id)`, `g.has(id, n)`, `g.equip(id)`, `g.unequip(slot)`, `g.use(id)`, `g.inventory`, `g.weapon`, `g.armour` |
 | **Money and shops** | `await g.spend(amount)` (false if they can't), `await g.buy(ids)`, `await g.sell()` |
-| **Fights** | `g.monster(id)`, `await g.fight(monster)` (`'won'`, `'lost'` or `'fled'`) |
+| **Fights** | `g.monster(id)`, `await g.fight(monster)` (`'won'`, `'lost'` or `'fled'`; options `defeat` and `victory` change what losing does and winning says) |
 | **The world** | `g.world` (see above), `g.news(text)` (a line in the server's daily news; nothing in single-player) |
 | **Other** | `g.random(n)` (1 to n), `await g.sleep(seconds)`, `await g.animate(delay, path)` |
 
