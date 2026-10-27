@@ -352,6 +352,12 @@ screens: {
 - **`at`** scripts are triggers: they run when the player steps onto the
   tile, bumps into it (if it's solid, like the sign and the hermit), or
   arrives on it from another screen.
+- **`triggers`** (engine 0.5.0 or later) are the same, named by a
+  character instead of a tile: `{ H: hermit }`. The screen's map says
+  where each goes, in its `"triggers"` rows (one character a tile, `.` for
+  none), so moving a trigger is a change to the map, not the code, and one
+  character can go on many tiles. The game won't start if a character on a
+  map has no trigger, a trigger is on no tile, or a tile has two.
 - **`show`** runs every time the screen is drawn: for things drawn over
   the map, like a character who's only there sometimes.
 
