@@ -241,7 +241,8 @@ daily: ['hadDrink'],
 - **title**: `art` draws the title screen; `menu` places its options. The
   engine's title menu has six options in a fixed order (new game, save,
   load, help, resume, leave): the content gives their labels, positions and
-  colours, not what they do.
+  colours, not what they do. `menu.box`, if given, is the inside of the title's menu
+  box (column, row, width and height), where a server puts its login menus.
 - **help** and **credits**: lines of text for the help screen and the
   goodbye screen.
 - **worldMapLegend**: lines drawn over the world map (M).
@@ -263,6 +264,15 @@ game's text gets its colours and places:
 
 Anything the player typed (their name, say) should go through
 `escapeMarkup`, so a `{` in it is shown, not read as markup.
+
+Instead of writing a screen in markup, you can draw it in
+[Icy Draw](https://github.com/mkrueger/icy_tools/blob/master/crates/icy_draw/README.md)
+(engine 0.3.0 or later). `readIcy` reads its `.icy` file, `flatten` and
+`pictureMarkup` turn its layers into markup lines, and `tagMarkup` fills in
+its tags: each `@NAME@` in a tag's text from the values you give, lined up
+in the tag. Final Quest 2's
+[content/ui.ts](https://github.com/ellisgl/final-quest-2/blob/main/content/ui.ts)
+draws its title, help and credits this way.
 
 ### Colours
 
