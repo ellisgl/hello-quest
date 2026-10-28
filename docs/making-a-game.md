@@ -297,8 +297,7 @@ as it can:
   greys can all become one grey.
 
 Locally, `FQ2_COLORS` (`true`, `256` or `16`) overrides what the terminal
-says. Over SSH, the server goes by the terminal type the client sends
-(and `COLORTERM`, if the client sends it).
+says. On the multiplayer server, the browser shows any colour.
 
 ### The opening and the inventory
 
@@ -488,8 +487,8 @@ Hello Quest from the opening to the hermit's potion this way.
 
 ## Multiplayer and mods
 
-The same content runs on the multiplayer server, over SSH and the
-web, with accounts and saves in a database. A game's server is a few lines
+The same content runs on the multiplayer server, in the web
+browser, with accounts and saves in a database. A game's server is a few lines
 (see Final Quest 2's [server.ts](https://github.com/ellisgl/FQ2TS/blob/main/server.ts)):
 
 ```ts
