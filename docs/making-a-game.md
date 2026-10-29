@@ -458,6 +458,18 @@ shown after their name where a server lists players (P, S and L);
 `g.title = ''` takes it away. Final Quest 2 makes whoever slays the Wyrm
 "the Wyrmslayer".
 
+### Good and evil
+
+`g.alignment` is the player's alignment, from -10 (evil) to 10 (good), 0
+to start; changes stay within that, and it's kept in the save. Give the
+start player `alignment: 0` and a server ranks it in L. What moves it,
+and who cares, is up to the game (Final Quest 2's
+[deeds.ts](https://github.com/ellisgl/final-quest-2/blob/main/content/scripts/deeds.ts)).
+
+`g.nearby()` is the other players next to this one, on a server (alone,
+there are none), each with their name, hitpoints and `wound(amount,
+why)`, which takes hitpoints (never below 1) and tells them why.
+
 ## Scripts: the `g` API
 
 Every script gets `g` (a `ScriptContext`; see
