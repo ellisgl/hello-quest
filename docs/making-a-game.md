@@ -494,15 +494,16 @@ Scripts can be `async`: `await` everything that waits for the player.
 
 ## The entry point
 
-[hello.ts](../hello.ts) reads the data folder, adds any mods,
-makes the `Game` and runs it:
+[hello.ts](../hello.ts) reads the data folder, adds the mods named
+with `--enable-mods` (none, unless some are), makes the `Game` and runs
+it:
 
 ```ts
 const { config, ...data } = readGameData(join(import.meta.dir, 'data'));
 game = new Game({
     term: new Terminal({ name: config.title }),
     config,
-    ...applyMods({ content, ...data }, await loadMods(modsDir)),
+    ...applyMods({ content, ...data }, await loadMods(modsDir, readModList(enabledMods, '--enable-mods'))),
     saves: new Saves(join(import.meta.dir, 'saves')),
 });
 ```
@@ -555,7 +556,9 @@ Two things to know for it: a player's name comes from their account, so
 `newGame` shouldn't ask again if `g.name` is already set (Hello Quest
 doesn't), and the screensaver is off.
 
-Games load mods with `loadMods` and `applyMods`, as hello.ts does; see
+Games load mods with `loadMods` (only the ones named: `readModList` reads
+a list such as `wishing-well,other-mod`) and `applyMods`, as hello.ts
+does; see
 [mods.md](https://github.com/ellisgl/FQ2TS/blob/main/docs/mods.md) for writing them.
 
 ## What the engine doesn't do (yet)
