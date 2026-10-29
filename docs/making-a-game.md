@@ -247,7 +247,9 @@ daily: ['hadDrink'],
   box (column, row, width and height), where a server puts its login menus.
 - **help** and **credits**: lines of text for the help screen and the
   goodbye screen.
-- **worldMapLegend**: lines drawn over the world map (M).
+- **worldMapLegend**: lines drawn over the world map (M). The map shows
+  what the player has seen: each outdoor screen they've been to and the
+  ones around it (kept in the save as `seen`); the rest is dark.
 - **statusLine**: the bottom line while exploring, from the player.
 
 These are written in the engine's **text markup**, which is how all the

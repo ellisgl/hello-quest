@@ -5,7 +5,7 @@
     "": {
       "name": "hello-quest",
       "dependencies": {
-        "@fq2ts/engine": "github:ellisgl/fq2ts-engine#61f95974d3132b2ea9fc310083790d127639f6fd",
+        "@fq2ts/engine": "github:ellisgl/fq2ts-engine#9e884bbb65c98a256ebefe278c361e807d8923e2",
         "@fq2ts/tools": "github:ellisgl/fq2ts-tools#v0.4.0",
       },
       "devDependencies": {
@@ -18,7 +18,7 @@
     },
   },
   "overrides": {
-    "@fq2ts/engine": "github:ellisgl/fq2ts-engine#61f95974d3132b2ea9fc310083790d127639f6fd",
+    "@fq2ts/engine": "github:ellisgl/fq2ts-engine#9e884bbb65c98a256ebefe278c361e807d8923e2",
   },
   "packages": {
     "@cacheable/memory": ["@cacheable/memory@2.2.0", "", { "dependencies": { "@cacheable/utils": "^2.5.0", "@keyv/bigmap": "^1.3.1", "hookified": "^1.15.1", "keyv": "^5.6.0" } }, "sha512-CTLKqLItRCEixEAewD3/j9DB3/o96gpTPD4eJ1v+DGOlxZRZncRQkGYqqnAGCscYd6RNeXfGeiuCphsPtqyIfQ=="],
@@ -39,7 +39,7 @@
 
     "@eslint/plugin-kit": ["@eslint/plugin-kit@0.7.3", "", { "dependencies": { "@eslint/core": "^1.2.1", "levn": "^0.4.1" } }, "sha512-IkO+/KEUvwbVpiURZg+P7zF74z5Jxe0UgJxVni+RtoHQ6IZieXaO02kmadomap/q+l6bc/jdPGGqTjhuZnuz1Q=="],
 
-    "@fq2ts/engine": ["@fq2ts/engine@github:ellisgl/fq2ts-engine#61f9597", {}, "ellisgl-fq2ts-engine-61f9597", "sha512-QA1FvzsFg+uKY+psOCMq4V8qT7HKiwTZq2BBUbC+c+nkus+X+bCXH1zEE8ls9NNlyHg2XayqDflWG2j0zqFdOw=="],
+    "@fq2ts/engine": ["@fq2ts/engine@github:ellisgl/fq2ts-engine#9e884bb", {}, "ellisgl-fq2ts-engine-9e884bb", "sha512-7imTlbn10d6XrLy2VvHYKj0qiXPBkei9RT3ENDyZFvieMav5akglCLHDtdQCMUQDGroJ4FGC2py8xET08/rp7w=="],
 
     "@fq2ts/tools": ["@fq2ts/tools@github:ellisgl/fq2ts-tools#31427ed", { "dependencies": { "@fq2ts/engine": "github:ellisgl/fq2ts-engine#v0.7.0" } }, "ellisgl-fq2ts-tools-31427ed", "sha512-l5n8xUHB9vFw99a+wbRx3OaL33wrR7gu+0dqPtQq1l+0EdScvRqWrP3Ph/zVfLFq2NCH45Qf8emuUMDLHbHqEw=="],
 
