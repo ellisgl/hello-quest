@@ -451,6 +451,13 @@ and items the game no longer has are dropped, new flags start at their
 first value, and a player on a screen that's gone starts again at the
 start.
 
+### Titles
+
+`g.title = 'the Brave'` gives the player a title, kept in their save and
+shown after their name where a server lists players (P, S and L);
+`g.title = ''` takes it away. Final Quest 2 makes whoever slays the Wyrm
+"the Wyrmslayer".
+
 ## Scripts: the `g` API
 
 Every script gets `g` (a `ScriptContext`; see
