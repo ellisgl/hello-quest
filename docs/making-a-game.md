@@ -408,6 +408,36 @@ uses won't start (nor S, in debug mode); and a server adds its keys (T, Y,
 P, L and so on) beside the game's, so a game played on the server
 shouldn't take those.
 
+### Jobs
+
+`@fq2ts/engine/jobs` gives a game LORD II's delivery jobs: townspeople
+hand the player a sack or a letter to take to someone in another town,
+for $40-$100 (and $2 more for each job done, up to $100 more). One job at
+a time, 4 offers a day, a small bonus (hitpoints, strength, defence or a
+tip) for delivering on the day the job was taken, and a line in the
+news. List who gives and takes them, and keep each player's job in their
+flags:
+
+```ts
+import { JOB_FLAGS, JobBoard, type JobFlags } from '@fq2ts/engine/jobs';
+
+export type Flags = { met: boolean } & JobFlags;
+// start's flags: { met: false, ...JOB_FLAGS }
+
+export const jobs = new JobBoard<Flags, Shared>({ givers: [
+    { id: 'baker', name: 'the baker', town: 'Bunton' },
+    { id: 'smith', name: 'the smith', town: 'Anvil', lines: { none: '{white}"Busy. Tomorrow."' } },
+] });
+```
+
+Then, for someone who only had something to say, `jobs.giver(id,
+greeting)` is their trigger: what they say, then work (or, if the player
+has their delivery, straight to handing it over). For someone with a menu
+of their own, add `jobs.label(g, id)` to it and run `jobs.talk(g, id)`
+when it's picked. `jobs.job(g)` is the player's job, if any (Final
+Quest 2's inventory shows it). Each giver can have their own `lines`
+(offer, declined, none, thanks, waiting); the rest are the engine's.
+
 ### upgradeSave
 
 If a new version of the game changes what's in a save (a flag becomes an
