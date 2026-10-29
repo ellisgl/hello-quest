@@ -64,7 +64,8 @@ The world is a grid of **screens**, 80 across and 24 down. A screen's
 number is its place on the grid, so screen n's neighbours are n-1 and n+1
 (west and east) and n-80 and n+80 (north and south); walking off the edge
 of one screen takes the player onto the next, if there is one. Each screen
-is 79x22 cells; the rows below it are the status bar.
+is 79x22 cells (on the usual 80x25 screen; see The data for bigger ones);
+the rows below it are the status bar.
 
 Hello Quest has screen 1 (the meadow), screen 2 east of it (a wild field)
 and screen 1000, the inside of the hermit's hut. Interiors are reached by
@@ -134,6 +135,12 @@ player's damage when they turn superhuman (a cheat in Final Quest 2).
 ```json
 { "title": "Hello Quest", "company": "You", "companyShort": "You", "version": "V1.0", "revision": "Rev A", "superhumanFactor": 3 }
 ```
+
+A game can be bigger than 80x25 with `"screen": { "width": 120, "height":
+37 }`. Its map is then the screen less the last column and the bottom
+three rows (119x34), so every map file must be that size, and players need
+a window at least that big. Give the `Terminal` the size too, as hello.ts
+does (`size: config.screen`).
 
 **items.json** is the item catalogue:
 
@@ -501,9 +508,9 @@ it:
 ```ts
 const { config, ...data } = readGameData(join(import.meta.dir, 'data'));
 game = new Game({
-    term: new Terminal({ name: config.title }),
+    term: new Terminal({ name: config.title, size: config.screen }),
     config,
-    ...applyMods({ content, ...data }, await loadMods(modsDir, readModList(enabledMods, '--enable-mods'))),
+    ...applyMods({ content, ...data }, await loadMods(modsDir, readModList(enabledMods, '--enable-mods'), mapSize(config.screen))),
     saves: new Saves(join(import.meta.dir, 'saves')),
 });
 ```
@@ -563,8 +570,9 @@ does; see
 
 ## What the engine doesn't do (yet)
 
-- The screen is 80x25, and colours are xterm's 256: no colour by its own
-  red, green and blue.
+- The screen is one size for the whole game (80x25, or what config.json
+  says): the map doesn't scroll, and nothing moves to fit a bigger window.
+- Colours are xterm's 256: no colour by its own red, green and blue.
 - The title menu's six options and their order are fixed.
 - The engine's keys while exploring are fixed: arrows (or 8 4 6 2) to
   walk, I or V, M, B, R, ? and Escape. A game can add its own (see Keys),

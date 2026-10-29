@@ -10,6 +10,7 @@ import { Saves } from '@fq2ts/engine/saves';
 import { Game } from '@fq2ts/engine/game';
 import { readGameData } from '@fq2ts/engine/data';
 import { applyMods, loadMods, readModList } from '@fq2ts/engine/mods';
+import { mapSize } from '@fq2ts/engine/world';
 import content, { type Flags } from './content.ts';
 
 // Stops with a plain message (a bad data file, a terminal too small...).
@@ -30,9 +31,10 @@ let game: Game<Flags>;
 try {
     const { config, ...data } = readGameData(join(import.meta.dir, 'data'));
     game = new Game({
-        term: new Terminal({ name: config.title }),
+        // (The screen is config.json's size: 80x25 unless it says otherwise.)
+        term: new Terminal({ name: config.title, size: config.screen }),
         config,
-        ...applyMods({ content, ...data }, await loadMods(modsDir, readModList(enabledMods, '--enable-mods'))),
+        ...applyMods({ content, ...data }, await loadMods(modsDir, readModList(enabledMods, '--enable-mods'), mapSize(config.screen))),
         saves: new Saves(join(import.meta.dir, 'saves')),
     });
 } catch (error) {
