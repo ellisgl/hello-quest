@@ -107,7 +107,10 @@ Every grid has 22 rows of 79 characters:
   **safe** (optional, `true`) keeps players from fighting each other there
   on a server (interiors always are; P in the editor's overview);
   **inn** (optional, `true`) lets players take a room there on a server,
-  and be safe while they're away (I in the editor's overview).
+  and be safe while they're away (I in the editor's overview);
+  **home** (optional, `true`) is the player's home: leaving the realm
+  there, on a server, they sleep safely in their own bed, for nothing
+  (H in the editor's overview).
 
 Don't write these by hand: use the level editor. Copy Hello Quest's
 [tools/edit.ts](../tools/edit.ts), which runs the editor on
